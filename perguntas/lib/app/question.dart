@@ -21,7 +21,7 @@ class QuestionsMain {
     {
       'text': 'Qual a sua comida favorita?',
       'answer': [
-        {'nome': 'lasanha', 'nota': 8},
+        {'nome': 'lasanha', 'nota': 9},
         {'nome': 'feijoada', 'nota': 10},
         {'nome': 'macarronada', 'nota': 6},
         {'nome': 'churrasco', 'nota': 10},
