@@ -1,9 +1,7 @@
-import 'package:despesas_pessoais/components/chart.dart';
 import 'package:despesas_pessoais/components/transaction_user.dart';
 import 'package:despesas_pessoais/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
 import 'components/transaction_form.dart';
 import 'config/custom_theme.dart';
 
