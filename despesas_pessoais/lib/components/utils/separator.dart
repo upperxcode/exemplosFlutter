@@ -8,6 +8,7 @@ enum Direction {
 class Separator extends StatelessWidget {
   final Direction direction;
   final double size;
+  // ignore: use_key_in_widget_constructors
   const Separator([
     this.direction = Direction.horizontal,
     this.size = 10,

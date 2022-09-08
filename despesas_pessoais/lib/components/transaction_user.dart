@@ -1,18 +1,16 @@
-import 'dart:math';
-
-import 'package:despesas_pessoais/components/transaction_form.dart';
 import 'package:despesas_pessoais/components/transaction_list.dart';
+import 'package:despesas_pessoais/repositories/despesa_repository.dart';
 import 'package:flutter/material.dart';
-import '../models/transaction.dart';
 import 'chart.dart';
 
 class TransactionUser extends StatefulWidget {
-  final Transactions transactions;
+  final DespesaRepository transactions;
+  final double difHeight;
 
-  TransactionUser({Key? key, required this.transactions}) : super(key: key);
+  const TransactionUser({Key? key, required this.transactions, required this.difHeight}) : super(key: key);
 
   @override
-  _TransactionUserState createState() => _TransactionUserState();
+  State<TransactionUser> createState() => _TransactionUserState();
 }
 
 class _TransactionUserState extends State<TransactionUser> {
@@ -45,15 +43,17 @@ class _TransactionUserState extends State<TransactionUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Chart(widget.transactions),
-          TransactionList(widget.transactions),
-        ],
-      ),
+    final availableHeight = MediaQuery.of(context).size.height - widget.difHeight;
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if ((!isPortrait && widget.transactions.chatIsVisible) || isPortrait)
+          SizedBox(height: availableHeight * (isPortrait ? 0.27 : 1), child: Chart(widget.transactions)),
+        if ((!isPortrait && !widget.transactions.chatIsVisible) || isPortrait)
+          SizedBox(height: availableHeight * (isPortrait ? 0.73 : 1), child: TransactionList(widget.transactions)),
+      ],
     );
   }
 }

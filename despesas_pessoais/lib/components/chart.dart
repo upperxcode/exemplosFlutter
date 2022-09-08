@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:despesas_pessoais/components/chart_bar.dart';
-import 'package:despesas_pessoais/models/transaction.dart';
+import 'package:despesas_pessoais/repositories/despesa_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
-  final Transactions recentTransaction;
+  final DespesaRepository recentTransaction;
 
   const Chart(this.recentTransaction, {Key? key}) : super(key: key);
 
@@ -17,11 +15,11 @@ class Chart extends StatelessWidget {
       );
       double totalSum = 0.0;
 
-      for (var index in recentTransaction.recentTransactions) {
-        if ((index.date.day == weekDay.day) &&
-            (index.date.month == weekDay.month) &&
-            (index.date.year == weekDay.year)) {
-          totalSum += index.value;
+      for (var index in recentTransaction.recentTransactions() ) {
+        if ((index.date!.day == weekDay.day) &&
+            (index.date!.month == weekDay.month) &&
+            (index.date!.year == weekDay.year)) {
+          totalSum += index.value!;
         }
       }
 
@@ -42,10 +40,10 @@ class Chart extends StatelessWidget {
       animation: recentTransaction,
       builder: (context, child) => Card(
         elevation: 6,
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
+          child: SizedBox(
             height: 110,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

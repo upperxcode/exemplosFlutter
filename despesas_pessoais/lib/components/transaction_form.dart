@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class TransactionForm extends StatefulWidget {
   final Function(String, double, DateTime) onSubmit;
 
-  TransactionForm(this.onSubmit, {super.key});
+  const TransactionForm(this.onSubmit, {super.key});
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();
@@ -22,8 +22,6 @@ class _TransactionFormState extends State<TransactionForm> {
     if (title.isEmpty || value <= 0 || _selectedDate == null) {
       return;
     }
-
-    print('valores $title, $value, $_selectedDate');
 
     widget.onSubmit(title, value, _selectedDate!);
     _titleController.clear();
@@ -53,19 +51,19 @@ class _TransactionFormState extends State<TransactionForm> {
     return Card(
       elevation: 5,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(children: [
           TextField(
             onSubmitted: (_) => _onSubmitForm(),
             controller: _titleController,
-            decoration: InputDecoration(labelText: 'Título'),
+            decoration: const InputDecoration(labelText: 'Título'),
           ),
           const Separator(Direction.horizontal),
           TextField(
             onSubmitted: (_) => _onSubmitForm(),
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             controller: _valueController,
-            decoration: InputDecoration(labelText: 'Valor R\$'),
+            decoration: const InputDecoration(labelText: 'Valor R\$'),
           ),
           const Separator(Direction.horizontal),
           Row(children: [
@@ -78,7 +76,7 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             TextButton(
               onPressed: _showDatePicker,
-              child: Text(
+              child: const Text(
                 'Selecione uma data!',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
@@ -87,7 +85,7 @@ class _TransactionFormState extends State<TransactionForm> {
           const Separator(Direction.horizontal),
           ElevatedButton(
             onPressed: () => _onSubmitForm(),
-            child: const Text('Nova despesa'),
+            child: const FittedBox(child: Text('Nova despesa')),
           )
         ]),
       ),
