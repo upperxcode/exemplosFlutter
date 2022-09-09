@@ -32,8 +32,6 @@ class ExpenseApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-
-
   final DespesaRepository transactions = DespesaRepository();
 
   HomePage({super.key});
